@@ -1,0 +1,15 @@
+# docker-parser
+
+A library to parse docker's image identifier.
+
+> **NOTE:** This library is a rewrite and a subset of docker codebase.
+
+## Docker source reference
+
+ * **docker/image.go:** `github.com/docker/docker/image/v1/imagev1.go`
+ * **docker/reference.go:** `github.com/docker/docker/reference/reference.go`
+ * **distribution/digest.go:** `github.com/docker/distribution/digest/digest.go`
+ * **distribution/reference.go:** `github.com/docker/distribution/reference/reference.go`
+ * **distribution/regex.go:** `github.com/docker/distribution/reference/regex.go`
+
+ * **distribution/reference.go:** `github.com/docker/distribution/reference/reference.go`
