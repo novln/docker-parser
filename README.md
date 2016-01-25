@@ -1,3 +1,5 @@
+[![Documentation][godoc-img]][godoc-url]
+
 # docker-parser
 
 A library to parse docker's image identifier.
@@ -8,8 +10,16 @@ A library to parse docker's image identifier.
 
  * **docker/image.go:** `github.com/docker/docker/image/v1/imagev1.go`
  * **docker/reference.go:** `github.com/docker/docker/reference/reference.go`
- * **distribution/digest.go:** `github.com/docker/distribution/digest/digest.go`
- * **distribution/reference.go:** `github.com/docker/distribution/reference/reference.go`
- * **distribution/regex.go:** `github.com/docker/distribution/reference/regex.go`
+ * **distribution/digest/digest.go:** `github.com/docker/distribution/digest/digest.go`
+ * **distribution/digest/digester.go:** `github.com/docker/distribution/digest/digester.go`
+ * **distribution/reference/reference.go:** `github.com/docker/distribution/reference/reference.go`
+ * **distribution/reference/regex.go:** `github.com/docker/distribution/reference/regex.go`
 
- * **distribution/reference.go:** `github.com/docker/distribution/reference/reference.go`
+## License
+
+See [`LICENSE`](LICENSE).
+
+Docker source are licensed under the Apache License, Version 2.0.
+
+[godoc-url]: https://godoc.org/github.com/crowley-io/docker-parser
+[godoc-img]: https://godoc.org/github.com/crowley-io/docker-parser?status.svg
