@@ -6,49 +6,43 @@ import (
 	"github.com/crowley-io/docker-parser/docker"
 )
 
+// Reference is an opaque object that include identifier such as a name, tag, repository, registry, etc...
+type Reference struct {
+	named docker.Named
+	tag   string
+}
+
 // Name returns the image's name. (ie: debian[:8.2])
-func Name(remote string) (string, error) {
-	return parse(remote, func(e docker.Named, t string) string {
-		return e.RemoteName() + t
-	})
+func (r Reference) Name() string {
+	return r.named.RemoteName() + r.tag
 }
 
 // ShortName returns the image's name (ie: debian)
-func ShortName(remote string) (string, error) {
-	return parse(remote, func(e docker.Named, t string) string {
-		return e.RemoteName()
-	})
+func (r Reference) ShortName() string {
+	return r.named.RemoteName()
 }
 
-// Tag returns the image's tag.
-func Tag(remote string) (string, error) {
-	return parse(remote, func(e docker.Named, t string) string {
-		if len(t) > 1 {
-			return t[1:]
-		}
-		return ""
-	})
+// Tag returns the image's tag (or digest).
+func (r Reference) Tag() string {
+	if len(r.tag) > 1 {
+		return r.tag[1:]
+	}
+	return ""
 }
 
 // Registry returns the image's registry. (ie: host[:port])
-func Registry(remote string) (string, error) {
-	return parse(remote, func(e docker.Named, t string) string {
-		return e.Hostname()
-	})
+func (r Reference) Registry() string {
+	return r.named.Hostname()
 }
 
 // Repository returns the image's repository. (ie: registry/name)
-func Repository(remote string) (string, error) {
-	return parse(remote, func(e docker.Named, t string) string {
-		return e.FullName()
-	})
+func (r Reference) Repository() string {
+	return r.named.FullName()
 }
 
 // Remote returns the image's remote identifier. (ie: registry/name[:tag])
-func Remote(remote string) (string, error) {
-	return parse(remote, func(e docker.Named, t string) string {
-		return e.FullName() + t
-	})
+func (r Reference) Remote() string {
+	return r.named.FullName() + r.tag
 }
 
 func clean(url string) string {
@@ -64,14 +58,13 @@ func clean(url string) string {
 	return s
 }
 
-type handler func(n docker.Named, t string) string
-
-func parse(remote string, handle handler) (string, error) {
+// Parse returns a Reference from analyzing the given remote identifier.
+func Parse(remote string) (*Reference, error) {
 
 	n, err := docker.ParseNamed(clean(remote))
 
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	n = docker.WithDefaultTag(n)
@@ -84,5 +77,5 @@ func parse(remote string, handle handler) (string, error) {
 		t = ":" + x.Tag()
 	}
 
-	return handle(n, t), nil
+	return &Reference{named: n, tag: t}, nil
 }

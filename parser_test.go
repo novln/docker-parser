@@ -11,162 +11,175 @@ func TestShortParse(t *testing.T) {
 
 	remote := "foo/bar"
 
-	check(t, Name, "foo/bar:latest", remote)
-	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "latest", remote)
-	check(t, Registry, "docker.io", remote)
-	check(t, Repository, "docker.io/foo/bar", remote)
-	check(t, Remote, "docker.io/foo/bar:latest", remote)
-
+	if reference := parse(t, remote); reference != nil {
+		assert.Equal(t, "foo/bar:latest", reference.Name())
+		assert.Equal(t, "foo/bar", reference.ShortName())
+		assert.Equal(t, "latest", reference.Tag())
+		assert.Equal(t, "docker.io", reference.Registry())
+		assert.Equal(t, "docker.io/foo/bar", reference.Repository())
+		assert.Equal(t, "docker.io/foo/bar:latest", reference.Remote())
+	}
 }
 
 func TestShortParseWithTag(t *testing.T) {
 
 	remote := "foo/bar:1.1"
 
-	check(t, Name, "foo/bar:1.1", remote)
-	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "1.1", remote)
-	check(t, Registry, "docker.io", remote)
-	check(t, Repository, "docker.io/foo/bar", remote)
-	check(t, Remote, "docker.io/foo/bar:1.1", remote)
-
+	if reference := parse(t, remote); reference != nil {
+		assert.Equal(t, "foo/bar:1.1", reference.Name())
+		assert.Equal(t, "foo/bar", reference.ShortName())
+		assert.Equal(t, "1.1", reference.Tag())
+		assert.Equal(t, "docker.io", reference.Registry())
+		assert.Equal(t, "docker.io/foo/bar", reference.Repository())
+		assert.Equal(t, "docker.io/foo/bar:1.1", reference.Remote())
+	}
 }
 
 func TestShortParseWithDigest(t *testing.T) {
 
 	remote := "foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb"
 
-	check(t, Name, "foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", remote)
-	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", remote)
-	check(t, Registry, "docker.io", remote)
-	check(t, Repository, "docker.io/foo/bar", remote)
-	check(t, Remote, "docker.io/foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", remote)
-
+	if reference := parse(t, remote); reference != nil {
+		assert.Equal(t, "foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", reference.Name())
+		assert.Equal(t, "foo/bar", reference.ShortName())
+		assert.Equal(t, "sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", reference.Tag())
+		assert.Equal(t, "docker.io", reference.Registry())
+		assert.Equal(t, "docker.io/foo/bar", reference.Repository())
+		assert.Equal(t, "docker.io/foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", reference.Remote())
+	}
 }
 
 func TestRegistry(t *testing.T) {
 
 	remote := "localhost.localdomain/foo/bar"
 
-	check(t, Name, "foo/bar:latest", remote)
-	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "latest", remote)
-	check(t, Registry, "localhost.localdomain", remote)
-	check(t, Repository, "localhost.localdomain/foo/bar", remote)
-	check(t, Remote, "localhost.localdomain/foo/bar:latest", remote)
-
+	if reference := parse(t, remote); reference != nil {
+		assert.Equal(t, "foo/bar:latest", reference.Name())
+		assert.Equal(t, "foo/bar", reference.ShortName())
+		assert.Equal(t, "latest", reference.Tag())
+		assert.Equal(t, "localhost.localdomain", reference.Registry())
+		assert.Equal(t, "localhost.localdomain/foo/bar", reference.Repository())
+		assert.Equal(t, "localhost.localdomain/foo/bar:latest", reference.Remote())
+	}
 }
 
 func TestRegistryWithTag(t *testing.T) {
 
 	remote := "localhost.localdomain/foo/bar:1.1"
 
-	check(t, Name, "foo/bar:1.1", remote)
-	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "1.1", remote)
-	check(t, Registry, "localhost.localdomain", remote)
-	check(t, Repository, "localhost.localdomain/foo/bar", remote)
-	check(t, Remote, "localhost.localdomain/foo/bar:1.1", remote)
-
+	if reference := parse(t, remote); reference != nil {
+		assert.Equal(t, "foo/bar:1.1", reference.Name())
+		assert.Equal(t, "foo/bar", reference.ShortName())
+		assert.Equal(t, "1.1", reference.Tag())
+		assert.Equal(t, "localhost.localdomain", reference.Registry())
+		assert.Equal(t, "localhost.localdomain/foo/bar", reference.Repository())
+		assert.Equal(t, "localhost.localdomain/foo/bar:1.1", reference.Remote())
+	}
 }
 
 func TestRegistryWithDigest(t *testing.T) {
 
 	remote := "localhost.localdomain/foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb"
 
-	check(t, Name, "foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", remote)
-	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", remote)
-	check(t, Registry, "localhost.localdomain", remote)
-	check(t, Repository, "localhost.localdomain/foo/bar", remote)
-	check(t, Remote, "localhost.localdomain/foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", remote)
-
+	if reference := parse(t, remote); reference != nil {
+		assert.Equal(t, "foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", reference.Name())
+		assert.Equal(t, "foo/bar", reference.ShortName())
+		assert.Equal(t, "sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", reference.Tag())
+		assert.Equal(t, "localhost.localdomain", reference.Registry())
+		assert.Equal(t, "localhost.localdomain/foo/bar", reference.Repository())
+		assert.Equal(t, "localhost.localdomain/foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", reference.Remote())
+	}
 }
 
 func TestRegistryWithPort(t *testing.T) {
 
 	remote := "localhost.localdomain:5000/foo/bar"
 
-	check(t, Name, "foo/bar:latest", remote)
-	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "latest", remote)
-	check(t, Registry, "localhost.localdomain:5000", remote)
-	check(t, Repository, "localhost.localdomain:5000/foo/bar", remote)
-	check(t, Remote, "localhost.localdomain:5000/foo/bar:latest", remote)
-
+	if reference := parse(t, remote); reference != nil {
+		assert.Equal(t, "foo/bar:latest", reference.Name())
+		assert.Equal(t, "foo/bar", reference.ShortName())
+		assert.Equal(t, "latest", reference.Tag())
+		assert.Equal(t, "localhost.localdomain:5000", reference.Registry())
+		assert.Equal(t, "localhost.localdomain:5000/foo/bar", reference.Repository())
+		assert.Equal(t, "localhost.localdomain:5000/foo/bar:latest", reference.Remote())
+	}
 }
 
 func TestRegistryWithPortAndTag(t *testing.T) {
 
 	remote := "localhost.localdomain:5000/foo/bar:1.1"
 
-	check(t, Name, "foo/bar:1.1", remote)
-	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "1.1", remote)
-	check(t, Registry, "localhost.localdomain:5000", remote)
-	check(t, Repository, "localhost.localdomain:5000/foo/bar", remote)
-	check(t, Remote, "localhost.localdomain:5000/foo/bar:1.1", remote)
-
+	if reference := parse(t, remote); reference != nil {
+		assert.Equal(t, "foo/bar:1.1", reference.Name())
+		assert.Equal(t, "foo/bar", reference.ShortName())
+		assert.Equal(t, "1.1", reference.Tag())
+		assert.Equal(t, "localhost.localdomain:5000", reference.Registry())
+		assert.Equal(t, "localhost.localdomain:5000/foo/bar", reference.Repository())
+		assert.Equal(t, "localhost.localdomain:5000/foo/bar:1.1", reference.Remote())
+	}
 }
 
 func TestRegistryWithPortAndDigest(t *testing.T) {
 
 	remote := "localhost.localdomain:5000/foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb"
 
-	check(t, Name, "foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", remote)
-	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", remote)
-	check(t, Registry, "localhost.localdomain:5000", remote)
-	check(t, Repository, "localhost.localdomain:5000/foo/bar", remote)
-	check(t, Remote, "localhost.localdomain:5000/foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", remote)
-
+	if reference := parse(t, remote); reference != nil {
+		assert.Equal(t, "foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", reference.Name())
+		assert.Equal(t, "foo/bar", reference.ShortName())
+		assert.Equal(t, "sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", reference.Tag())
+		assert.Equal(t, "localhost.localdomain:5000", reference.Registry())
+		assert.Equal(t, "localhost.localdomain:5000/foo/bar", reference.Repository())
+		assert.Equal(t, "localhost.localdomain:5000/foo/bar@sha256:bc8813ea7b3603864987522f02a76101c17ad122e1c46d790efc0fca78ca7bfb", reference.Remote())
+	}
 }
 
 func TestHttpRegistryClean(t *testing.T) {
 
 	remote := "http://localhost.localdomain:5000/foo/bar:latest"
 
-	check(t, Name, "foo/bar:latest", remote)
-	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "latest", remote)
-	check(t, Registry, "localhost.localdomain:5000", remote)
-	check(t, Repository, "localhost.localdomain:5000/foo/bar", remote)
-	check(t, Remote, "localhost.localdomain:5000/foo/bar:latest", remote)
-
+	if reference := parse(t, remote); reference != nil {
+		assert.Equal(t, "foo/bar:latest", reference.Name())
+		assert.Equal(t, "foo/bar", reference.ShortName())
+		assert.Equal(t, "latest", reference.Tag())
+		assert.Equal(t, "localhost.localdomain:5000", reference.Registry())
+		assert.Equal(t, "localhost.localdomain:5000/foo/bar", reference.Repository())
+		assert.Equal(t, "localhost.localdomain:5000/foo/bar:latest", reference.Remote())
+	}
 }
 
 func TestHttpsRegistryClean(t *testing.T) {
 
 	remote := "https://localhost.localdomain:5000/foo/bar:latest"
 
-	check(t, Name, "foo/bar:latest", remote)
-	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "latest", remote)
-	check(t, Registry, "localhost.localdomain:5000", remote)
-	check(t, Repository, "localhost.localdomain:5000/foo/bar", remote)
-	check(t, Remote, "localhost.localdomain:5000/foo/bar:latest", remote)
-
+	if reference := parse(t, remote); reference != nil {
+		assert.Equal(t, "foo/bar:latest", reference.Name())
+		assert.Equal(t, "foo/bar", reference.ShortName())
+		assert.Equal(t, "latest", reference.Tag())
+		assert.Equal(t, "localhost.localdomain:5000", reference.Registry())
+		assert.Equal(t, "localhost.localdomain:5000/foo/bar", reference.Repository())
+		assert.Equal(t, "localhost.localdomain:5000/foo/bar:latest", reference.Remote())
+	}
 }
 
 func TestParseError(t *testing.T) {
 
 	remote := "sftp://user:passwd@example.com/foo/bar:latest"
-	s, err := Name(remote)
+	x, err := Parse(remote)
 	assert.NotEmpty(t, err)
-	assert.Empty(t, s)
+	assert.Nil(t, x)
 
 }
 
-func check(t *testing.T, parse func(string) (string, error), expected, remote string) {
+func parse(t *testing.T, remote string) *Reference {
 
-	s, err := parse(remote)
+	reference, err := Parse(remote)
 
 	if err != nil {
-		assert.FailNow(t, "An error has occurred with the given parser")
+		assert.FailNow(t, "An error has occurred with the parser")
+		return nil
 	}
-
-	assert.Equal(t, expected, s)
+	assert.NotNil(t, reference)
+	assert.NotEmpty(t, reference)
+	return reference
 
 }
