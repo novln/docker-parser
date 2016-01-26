@@ -11,12 +11,12 @@ func TestShortParse(t *testing.T) {
 
 	remote := "foo/bar"
 
-	check(t, Name, "foo/bar", remote)
+	check(t, Name, "foo/bar:latest", remote)
 	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "", remote)
+	check(t, Tag, "latest", remote)
 	check(t, Registry, "docker.io", remote)
 	check(t, Repository, "docker.io/foo/bar", remote)
-	check(t, Remote, "docker.io/foo/bar", remote)
+	check(t, Remote, "docker.io/foo/bar:latest", remote)
 
 }
 
@@ -50,12 +50,12 @@ func TestRegistry(t *testing.T) {
 
 	remote := "localhost.localdomain/foo/bar"
 
-	check(t, Name, "foo/bar", remote)
+	check(t, Name, "foo/bar:latest", remote)
 	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "", remote)
+	check(t, Tag, "latest", remote)
 	check(t, Registry, "localhost.localdomain", remote)
 	check(t, Repository, "localhost.localdomain/foo/bar", remote)
-	check(t, Remote, "localhost.localdomain/foo/bar", remote)
+	check(t, Remote, "localhost.localdomain/foo/bar:latest", remote)
 
 }
 
@@ -89,12 +89,12 @@ func TestRegistryWithPort(t *testing.T) {
 
 	remote := "localhost.localdomain:5000/foo/bar"
 
-	check(t, Name, "foo/bar", remote)
+	check(t, Name, "foo/bar:latest", remote)
 	check(t, ShortName, "foo/bar", remote)
-	check(t, Tag, "", remote)
+	check(t, Tag, "latest", remote)
 	check(t, Registry, "localhost.localdomain:5000", remote)
 	check(t, Repository, "localhost.localdomain:5000/foo/bar", remote)
-	check(t, Remote, "localhost.localdomain:5000/foo/bar", remote)
+	check(t, Remote, "localhost.localdomain:5000/foo/bar:latest", remote)
 
 }
 

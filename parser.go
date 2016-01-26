@@ -74,6 +74,8 @@ func parse(remote string, handle handler) (string, error) {
 		return "", err
 	}
 
+	n = docker.WithDefaultTag(n)
+
 	var t string
 	switch x := n.(type) {
 	case docker.Canonical:
