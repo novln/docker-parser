@@ -22,7 +22,7 @@ Copy and/or Fork are **highly** recommended.
 
 ## License
 
-See [`LICENSE`](LICENSE).
+This is Free Software, released under the terms of the [`GPL v3`](LICENSE).
 
 Docker source are licensed under the Apache License, Version 2.0.
 
