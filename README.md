@@ -15,6 +15,11 @@ A library to parse docker's image identifier.
  * **distribution/reference/reference.go:** `github.com/docker/distribution/reference/reference.go`
  * **distribution/reference/regex.go:** `github.com/docker/distribution/reference/regex.go`
 
+## Versioning or Vendoring
+
+Expect compatibility break from this library.
+Copy and/or Fork are **highly** recommended.
+
 ## License
 
 See [`LICENSE`](LICENSE).
