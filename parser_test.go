@@ -18,7 +18,6 @@
 package dockerparser
 
 import (
-	_ "fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
