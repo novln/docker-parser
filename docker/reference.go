@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/crowley-io/docker-parser/distribution/digest"
-	"github.com/crowley-io/docker-parser/distribution/reference"
+	"github.com/novln/docker-parser/distribution/digest"
+	"github.com/novln/docker-parser/distribution/reference"
 )
 
 const (

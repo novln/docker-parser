@@ -19,7 +19,7 @@ package dockerparser
 import (
 	"strings"
 
-	"github.com/crowley-io/docker-parser/docker"
+	"github.com/novln/docker-parser/docker"
 )
 
 // Reference is an opaque object that include identifier such as a name, tag, repository, registry, etc...

@@ -25,7 +25,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/crowley-io/docker-parser/distribution/digest"
+	"github.com/novln/docker-parser/distribution/digest"
 )
 
 const (
