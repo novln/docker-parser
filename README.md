@@ -22,7 +22,8 @@ Copy and/or Fork are **highly** recommended.
 
 ## License
 
-This is Free Software, released under the [`Apache License, Version 2.0`](LICENSE).
+This is Free Software, released under the Apache License, Version 2.0.
+See [`LICENSE`](LICENSE) for the full license text.
 
 Docker source are licensed under the Apache License, Version 2.0.
 
