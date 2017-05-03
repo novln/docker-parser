@@ -22,9 +22,9 @@ Copy and/or Fork are **highly** recommended.
 
 ## License
 
-This is Free Software, released under the terms of the [`GPL v3`](LICENSE).
+This is Free Software, released under the [`Apache License, Version 2.0`](LICENSE).
 
 Docker source are licensed under the Apache License, Version 2.0.
 
-[godoc-url]: https://godoc.org/github.com/crowley-io/docker-parser
-[godoc-img]: https://godoc.org/github.com/crowley-io/docker-parser?status.svg
+[godoc-url]: https://godoc.org/github.com/novln/docker-parser
+[godoc-img]: https://godoc.org/github.com/novln/docker-parser?status.svg
