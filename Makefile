@@ -12,4 +12,4 @@ style: test
 lint: test
 	golint ./...
 
-.PHONY: test lint style diff
+.PHONY: test lint style setup
