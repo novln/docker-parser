@@ -8,17 +8,12 @@ A library to parse docker's image identifier.
 
 ## Docker source reference
 
- * **docker/image.go:** `github.com/docker/docker/image/v1/imagev1.go`
- * **docker/reference.go:** `github.com/docker/docker/reference/reference.go`
- * **distribution/digest/digest.go:** `github.com/docker/distribution/digest/digest.go`
- * **distribution/digest/digester.go:** `github.com/docker/distribution/digest/digester.go`
- * **distribution/reference/reference.go:** `github.com/docker/distribution/reference/reference.go`
- * **distribution/reference/regex.go:** `github.com/docker/distribution/reference/regex.go`
-
-## Versioning or Vendoring
-
-Expect compatibility break from this library.
-Copy and/or Fork are **highly** recommended.
+- **docker/image.go:** `github.com/docker/docker/image/v1/imagev1.go`
+- **docker/reference.go:** `github.com/docker/docker/reference/reference.go`
+- **distribution/digest/digest.go:** `github.com/docker/distribution/digest/digest.go`
+- **distribution/digest/digester.go:** `github.com/docker/distribution/digest/digester.go`
+- **distribution/reference/reference.go:** `github.com/docker/distribution/reference/reference.go`
+- **distribution/reference/regex.go:** `github.com/docker/distribution/reference/regex.go`
 
 ## License
 
